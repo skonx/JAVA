@@ -1,0 +1,71 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.root{
+	 /*-fx-background-image: url("Transport-Under-Construction-icon.png");*/
+	  
+}
+.menu-bar{
+	-fx-background-color: darkgrey ;
+}
+.menu {
+	-fx-font: bold 10.0pt "Arial";
+	
+}
+.combo-box{
+	-fx-text-alignment: center;
+	-fx-font: normal 10.0pt "Arial";
+}
+.combo-box-base  {
+   -fx-background-color: null;
+}
+.combo-box-base:hover  {
+    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.6) , 8.0, 0.0 , 0.0 , 0.0 );
+}
+
+/* new reference used in the java code*/
+.text-area {
+    text-area-background-color: transparent ;
+}
+
+.text-area .content {
+    -fx-background-color: text-area-background-color ;
+}
+
+/* new reference used in the java code*/
+.tab{
+	tablabel-text-color: black;
+}
+.tab .tab-label{
+	-fx-text-fill: tablabel-text-color;
+}
+
+#loading-label{
+	-fx-font : bold 10.0pt "Arial";
+}
+
+.table-view{
+	fgcolor: black;
+	bgcolor: transparent;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: fgcolor;
+    -fx-background-color: bgcolor;
+    -fx-alignment: center;
+}
+
+.grid {
+	/*-fx-background-insets: 1.0 50.0 1.0 50.0;*/
+	-fx-padding: 10.0;
+	-fx-hgap: 10.0;
+	-fx-vgap: 10.0;
+}
+
+.text-field{
+	-fx-pref-column-count:3.0;
+}
+
+.tooltip{
+	-fx-background-color: lightsalmon;
+	-fx-wrap-text: true;
+	-fx-opacity: 0.85;
+}

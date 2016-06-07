@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.CustomMenuItem?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.SelectionModel?>
+<?import java.net.URL?>
+<?import java.lang.String?>
+<?import javafx.scene.text.Text?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.control.cell.CheckBoxListCell?>
+<?import fr.yla.mt.gui.javafx.ColorRectComboBoxCell?>
+<?import fr.yla.mt.gui.javafx.ComboBoxCellFactory?>
+<?import fr.yla.mt.core.MTTypes?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Label?>
+
+<BorderPane fx:id="root" fx:controller="fr.yla.mt.gui.javafx.MTAPP2Controller"
+	xmlns:fx="http://javafx.com/fxml/1" styleClass="root">
+	<top>
+		<MenuBar fx:id="menuBar">
+			<Menu text="Edit">
+				<Menu fx:id="displayMenu" text="Display Types" />
+				<Menu text="Manage Color">
+					<Menu text="Create">
+						<MenuItem>
+							<!-- ColorPicker's default placement -->
+							<graphic>
+								<ColorPicker fx:id="colorPicker" onAction="#createNewColor" />
+							</graphic>
+						</MenuItem>
+					</Menu>
+					<!-- There is an issue with the custom color feature -->
+					<MenuItem text="Reset Current" onAction="#resetColor" />
+				</Menu>
+				<SeparatorMenuItem />
+				<MenuItem text="Exit" onAction="#exit" />
+			</Menu>
+			<Menu fx:id="generatorMenu" text="Generate">
+				<fx:define>
+					<ToggleGroup fx:id="generatorToggleGroup" />
+				</fx:define>
+				<RadioMenuItem fx:id="blendedMenuItem" text="Blended"
+					toggleGroup="$generatorToggleGroup" onAction="#generateBlendedMT"/>
+				<SeparatorMenuItem />
+			</Menu>
+			<Menu text="Background Color">
+				<graphic>
+					<Rectangle width="20" height="20" fill="${bgcombobox.value}" />
+				</graphic>
+				<MenuItem>
+					<graphic>
+						<HBox>
+							<ComboBox fx:id="bgcombobox" onAction="#selectBGColor"
+								editable="false">
+								<buttonCell>
+									<ColorRectComboBoxCell />
+								</buttonCell>
+								<cellFactory>
+									<ComboBoxCellFactory />
+								</cellFactory>
+								<items>
+									<FXCollections fx:factory="observableArrayList">
+										<Color fx:value="green" />
+										<Color fx:value="blue" />
+										<Color fx:value="yellow" />
+										<Color fx:value="red" />
+										<Color fx:value="transparent" />
+										<Color fx:value="white" />
+										<Color fx:value="black" />
+										<Color fx:value="grey" />
+										<Color fx:value="orange" />
+									</FXCollections>
+								</items>
+							</ComboBox>
+						</HBox>
+					</graphic>
+				</MenuItem>
+			</Menu>
+			<Menu text="Foreground Color">
+				<graphic>
+					<Rectangle width="20" height="20" fill="${fgcombobox.value}" />
+				</graphic>
+				<MenuItem>
+					<graphic>
+						<HBox>
+							<ComboBox fx:id="fgcombobox" onAction="#selectFGColor"
+								editable="false">
+								<buttonCell>
+									<ColorRectComboBoxCell />
+								</buttonCell>
+								<cellFactory>
+									<ComboBoxCellFactory />
+								</cellFactory>
+								<items>
+									<FXCollections fx:factory="observableArrayList">
+										<Color fx:value="green" />
+										<Color fx:value="blue" />
+										<Color fx:value="yellow" />
+										<Color fx:value="red" />
+										<Color fx:value="white" />
+										<Color fx:value="black" />
+										<Color fx:value="grey" />
+										<Color fx:value="orange" />
+									</FXCollections>
+								</items>
+							</ComboBox>
+						</HBox>
+					</graphic>
+				</MenuItem>
+			</Menu>
+			<Menu fx:id="deleteMenu" text="Delete"
+				visible="${tabPane.selectionModel.selectedItem.selected}">
+				<MenuItem onAction="#deleteSelectedTab"
+					text="${tabPane.selectionModel.selectedItem.text}" />
+				<MenuItem text="All" onAction="#deleteAllTabs" />
+			</Menu>
+		</MenuBar>
+	</top>
+	<center>
+		<TabPane fx:id="tabPane" visible="${!menuBar.disabled}" />
+	</center>
+	<bottom>
+		<StackPane visible="${menuBar.disabled}">
+			<ProgressBar fx:id="progressBar" progress="0" prefWidth="${root.width}" />
+			<Label id="loading-label" text="Loading..." />
+		</StackPane>
+	</bottom>
+</BorderPane>
