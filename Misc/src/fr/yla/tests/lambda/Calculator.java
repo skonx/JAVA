@@ -1,7 +1,10 @@
 package fr.yla.tests.lambda;
 
 import java.util.function.IntBinaryOperator;
-
+/**
+ * Signs and evaluation expression are defined for each enum.
+ * @author jsie
+ */
 public class Calculator {
 	private enum Operator{
 		A('+',(a,b) -> a+b),
