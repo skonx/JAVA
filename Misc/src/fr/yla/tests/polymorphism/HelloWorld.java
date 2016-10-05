@@ -41,6 +41,8 @@ public class HelloWorld {
 		list.set(1, null);
 		
 		list.forEach(System.out::println);
+                
+                a.display(new String());
 		
 	}
 
