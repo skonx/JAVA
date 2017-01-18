@@ -9,7 +9,7 @@ package fr.yla.tests.misc;
  *
  * @author jsie
  */
-public class TryVisibility {
+public class TryCatchVisibility {
 
     public static void main(String[] args) {
         String message = "hello";
