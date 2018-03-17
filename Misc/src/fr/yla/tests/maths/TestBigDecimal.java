@@ -17,8 +17,8 @@ public class TestBigDecimal {
     public static void main(String[] args) {
         int price = 1502;
         BigDecimal vtarate = new BigDecimal("5.5");
-        BigDecimal netprice = (new BigDecimal(price).multiply(vtarate.add(
-                new BigDecimal(100)))).divide(new BigDecimal(100)).setScale(0,
+        BigDecimal netprice = new BigDecimal(price).multiply(vtarate.add(
+                new BigDecimal(100))).divide(new BigDecimal(100)).setScale(0,
                 RoundingMode.HALF_UP);
         System.out.println(netprice);
 
