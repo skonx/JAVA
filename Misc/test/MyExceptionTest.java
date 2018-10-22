@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-import org.junit.Test;
+import java.util.Optional;
 import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  *
@@ -18,22 +19,53 @@ public class MyExceptionTest {
 
     @Test
     public void testExceptionThrown() {
+        final String message = "BOO";
         try {
-            start();
+            start(message);
         } catch (Exception e) {
-            System.err.println("Exception catched in testExceptionTrown()");
+            assert false;
         }
     }
 
     @Ignore
-    private void start() {
+    private void start(final String message) {
+
         try {
             if (true) {
-                throw new Exception("BOOM");
+                throw new Exception(message);
             }
         } catch (Exception e) {
             assert e != null;
-            System.err.println("Exception catched in start(): " + e.getMessage());
+            assert message.equals(e.getMessage());
         }
+    }
+
+    @Test
+    /**
+     * Test Optional.ofNullable & ifPresent
+     */
+    public void testExceptionInLambda() {
+        Object something = null; //= new String("something");
+        final String message = "BOO";
+        try {
+            Optional.ofNullable(something)
+                    .ifPresent(s -> {
+                        throw new IllegalStateException(message);
+                    });
+        } catch (Exception ex) {
+            assert ex instanceof IllegalStateException;
+        }
+
+        something = new String("something");
+
+        try {
+            Optional.ofNullable(something)
+                    .ifPresent(s -> {
+                        throw new IllegalStateException(message);
+                    });
+        } catch (Exception ex) {
+            assert ex instanceof IllegalStateException;
+        }
+
     }
 }
